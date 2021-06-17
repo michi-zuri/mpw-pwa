@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" manifest="mpw-pwa.appcache">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>mp</title>
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <link rel="stylesheet" href="css/main.css">
+<style>textarea {  position: absolute;  left: -100%;}</style>
 <link rel="manifest" href="manifest.json">
 </head>
 <body>
 <section id="identity" class="active"><form action="#">
-<input id="userName" type="text" placeholder="Your Full Name" value="Michael Paul Martin Killian" /><br>
-<input id="masterPassword" type="password" placeholder="Your Master Password" autofocus/><br>
+<input id="userName" type="text" placeholder="Your Full Name" value="" /><br>
+<input id="masterPassword" type="password" placeholder="Your Master Password" autocomplete="current-password" autofocus autocomplete="current-password" /><br>
 <input type="submit" value="⏎" /><br>
 <input type="image" src="img/spinner.svg" />
 <select id="version" class="minimal">
@@ -38,12 +39,13 @@
 <option value="phrase">Phrase</option>
 </select>
 <br>
-<h2 id="sitePassword" title="Your password is ..."></h2><br>
-<input id="logout" type="submit" value="⎋" />
+<h2 id="sitePassword" style="color:#111"></h2><br>
+<button id="copypassword">Copy password</button>
 <input type="image" src="img/spinner.svg" />
 </p>
 </section>
 <footer>
+<input id="logout" type="submit" value="forget passwords" />
 <p>This page was made possible thanks to <a href="https://tomthorogood.co.uk/" title="Tom Thorogood">tmthrgd</a>'s <a href="https://github.com/tmthrgd/mpw-js">mpw-js</a>.<br>
 <em><a href="https://masterpassword.app">Master Password</a> is a security product and algorithm by <a href="http://www.lhunath.com" title="Maarten Billemont">Maarten Billemont</a>, <a href="http://www.lyndir.com">Lyndir</a> (&copy; 2011-2014).</em><br>
 </footer>
@@ -51,6 +53,18 @@
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/dependencies.js"></script>
 <script src="js/main.js"></script>
+<script>
+function copyFunction() {
+  const copyText = document.getElementById("sitePassword").textContent;
+  const textArea = document.createElement('textarea');
+  textArea.textContent = copyText;
+  document.body.append(textArea);
+  textArea.select();
+  document.execCommand("copy");
+}
+
+document.getElementById('copypassword').addEventListener('click', copyFunction);
+</script>
 </body>
 </html>
 
